@@ -3,8 +3,11 @@ Title: Acesso à API dos Dados Abertos via R
 Version: 0.0.0.9000
 Authors@R: person("Caio", "Lente", email = "ctlente@gmail.com", role = c("aut", "cre"))
 Description: Este pacote implementa uma interface simples e acessível
-  da API RESTful do portal Dados Abertos da Câmara dos Deputados
+  da API RESTful do portal Dados Abertos da Câmara dos Deputados.
 Depends: R (>= 3.3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports:
+  magrittr
+RoxygenNote: 6.0.1
