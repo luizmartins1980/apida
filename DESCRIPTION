@@ -1,8 +1,9 @@
 Package: apida
-Title: What the Package Does (one line, title case)
+Title: Acesso à API dos Dados Abertos via R
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Caio", "Lente", email = "ctlente@gmail.com", role = c("aut", "cre"))
+Description: Este pacote implementa uma interface simples e acessível
+  da API RESTful do portal Dados Abertos da Câmara dos Deputados
 Depends: R (>= 3.3.3)
 License: What license is it under?
 Encoding: UTF-8
