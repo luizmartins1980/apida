@@ -125,7 +125,9 @@ pesq_despesas <- function(id_deputado, id_legislatura = NULL,
   res <- jsonlite::fromJSON(cham)
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res$dados)
+  saida <- tibble::as_tibble(res$dados) %>%
+    dplyr::mutate_at(.vars = c(1, 2, 8, 12, 13, 16),
+                     .funs = as.numeric)
   names(saida) <- c("ano", "mes", "tipo_despesa",
                     "id_documento", "tipo_documento",
                     "data_documento", "num_documento",
@@ -137,15 +139,39 @@ pesq_despesas <- function(id_deputado, id_legislatura = NULL,
   return(saida)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+# Pesquisar eventos de um deputado
+pesq_eventos <- function(id_deputado, data_inicio = NULL,
+                         data_fim = NULL, n_max = 15) {
+  
+  # Constantes da chamada
+  base <- stringr::str_c(
+    "https://dadosabertos.camara.leg.br/api/v2/deputados/",
+    id_deputado, "/eventos?")
+  fim <- "ordem=ASC&ordenarPor=dataInicio"
+  
+  # Criar listas de parâmetros
+  data_inicio <- cria_param("dataInicio", data_inicio)
+  data_fim <- cria_param("dataFim", data_fim)
+  
+  # Unir todos os parâmetros da chamada
+  params <- stringr::str_c(
+    data_inicio, data_fim,
+    fim, sep = "&")
+  
+  # Construir chamada
+  cham <- stringr::str_c(base, params)
+  
+  # Executar chamada
+  res <- jsonlite::fromJSON(cham)
+  
+  # Formatar resultados
+  saida <- tibble::as_tibble(res$dados) %>%
+    dplyr::select(-uri)
+  names(saida) <- c("id_evento", "datahora_inicio",
+                    "datahora_fim", "situacao_evento",
+                    "tipo_evento", "titulo",
+                    "local_camara", "local_externo",
+                    "sigla_orgao")
+  
+  return(saida)
+}
