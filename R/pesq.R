@@ -97,9 +97,9 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
 }
 
 # Pesquisar despesas de um deputado
-pesq_despesas <- function(id_deputado, id_legislatura = NULL,
-                          ano = NULL, mes = NULL, cpf_cnpj = NULL,
-                          n_max = 15) {
+pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
+                                   ano = NULL, mes = NULL, cpf_cnpj = NULL,
+                                   n_max = 15) {
   
   # Constantes da chamada
   base <- stringr::str_c(
@@ -140,8 +140,8 @@ pesq_despesas <- function(id_deputado, id_legislatura = NULL,
 }
 
 # Pesquisar eventos de um deputado
-pesq_eventos <- function(id_deputado, data_inicio = NULL,
-                         data_fim = NULL, n_max = 15) {
+pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
+                                 data_fim = NULL, n_max = 15) {
   
   # Constantes da chamada
   base <- stringr::str_c(
@@ -175,3 +175,38 @@ pesq_eventos <- function(id_deputado, data_inicio = NULL,
   
   return(saida)
 }
+
+# Pesquisar órgãos de um deputado
+pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
+                                  data_fim = NULL, n_max = 15) {
+  
+  # Constantes da chamada
+  base <- stringr::str_c(
+    "https://dadosabertos.camara.leg.br/api/v2/deputados/",
+    id_deputado, "/orgaos?")
+  fim <- "ordem=ASC&ordenarPor=dataInicio"
+  
+  # Criar listas de parâmetros
+  data_inicio <- cria_param("dataInicio", data_inicio)
+  data_fim <- cria_param("dataFim", data_fim)
+  
+  # Unir todos os parâmetros da chamada
+  params <- stringr::str_c(
+    data_inicio, data_fim,
+    fim, sep = "&")
+  
+  # Construir chamada
+  cham <- stringr::str_c(base, params)
+  
+  # Executar chamada
+  res <- jsonlite::fromJSON(cham)
+  
+  # Formatar resultados
+  saida <- tibble::as_tibble(res$dados)
+  names(saida) <- c("id_orgao", "sigla_orgao",
+                    "nome_orgao", "nome_papel",
+                    "data_inicio", "data_fim")
+  
+  return(saida)
+}
+
