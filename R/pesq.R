@@ -96,6 +96,34 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
   return(saida)
 }
 
+# Pesquisar legislaturas
+pesq_legislaturas <- function(data = NULL, n_max = 15) {
+  
+  # Constantes da chamada
+  base <- "https://dadosabertos.camara.leg.br/api/v2/legislaturas?"
+  fim <- "ordem=ASC&ordenarPor=id"
+  
+  # Criar listas de parâmetros
+  data <- cria_param("data", data)
+  
+  # Unir todos os parâmetros da chamada
+  params <- stringr::str_c(
+    data, fim, sep = "&")
+  
+  # Construir chamada
+  cham <- stringr::str_c(base, params)
+  
+  # Executar chamada
+  res <- jsonlite::fromJSON(cham)
+  
+  # Formatar resultados
+  saida <- dplyr::select(res$dados, -uri) %>% tibble::as_tibble()
+  names(saida) <- c("id_legislatura", "data_inicio", "data_fim")
+  
+  return(saida)
+}
+
+
 # Pesquisar despesas de um deputado
 pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
                                    ano = NULL, mes = NULL, cpf_cnpj = NULL,
@@ -165,8 +193,7 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
   res <- jsonlite::fromJSON(cham)
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res$dados) %>%
-    dplyr::select(-uri)
+  saida <- dplyr::select(res$dados, -uri) %>% tibble::as_tibble()
   names(saida) <- c("id_evento", "datahora_inicio",
                     "datahora_fim", "situacao_evento",
                     "tipo_evento", "titulo",
