@@ -14,4 +14,5 @@ cria_param <- function(nome, vec) {
 #' @importFrom magrittr %>%
 magrittr::`%>%`
 
+# Livrar-se de alertas espúrios
 globalVariables("uri")
