@@ -1,7 +1,7 @@
 
 # Pesquisar blocos
-pesq_bloco <- function(id_bloco = NULL, id_legislatura = NULL,
-                       sigla_partido = NULL, n_max = 15) {
+pesq_blocos <- function(id_bloco = NULL, id_legislatura = NULL,
+                        sigla_partido = NULL, n_max = 15) {
   
   # Constantes da chamada
   base <- "https://dadosabertos.camara.leg.br/api/v2/blocos?"
@@ -31,8 +31,8 @@ pesq_bloco <- function(id_bloco = NULL, id_legislatura = NULL,
 }
 
 # Pesquisar partidos
-pesq_partido <- function(sigla_partido = NULL, data_inicio = NULL,
-                         data_fim = NULL, id_legislatura = NULL, n_max = 15) {
+pesq_partidos <- function(sigla_partido = NULL, data_inicio = NULL,
+                          data_fim = NULL, id_legislatura = NULL, n_max = 15) {
   
   # Constantes da chamada
   base <- "https://dadosabertos.camara.leg.br/api/v2/partidos?"
@@ -63,9 +63,9 @@ pesq_partido <- function(sigla_partido = NULL, data_inicio = NULL,
 }
 
 # Pesquisar deputado
-pesq_deputado <- function(id_deputado = NULL, id_legislatura = NULL,
-                          sigla_uf = NULL, sigla_partido = NULL,
-                          sigla_sexo = NULL, n_max = 15) {
+pesq_deputados <- function(id_deputado = NULL, id_legislatura = NULL,
+                           sigla_uf = NULL, sigla_partido = NULL,
+                           sigla_sexo = NULL, n_max = 15) {
   
   # Constantes da chamada
   base <- "https://dadosabertos.camara.leg.br/api/v2/deputados?"
@@ -90,10 +90,17 @@ pesq_deputado <- function(id_deputado = NULL, id_legislatura = NULL,
   res <- jsonlite::fromJSON(cham)
   
   # Formatar resultados
-  saida <- dplyr::select(res$dados, -dplyr::starts_with("uri")) %>%
+  saida <- res$dados %>%
+    dplyr::select(-dplyr::starts_with("uri")) %>%
     tibble::as_tibble()
   names(saida) <- c("id_deputado", "nome_deputado", "sigla_partido",
                     "sigla_uf", "id_legislatura", "url_foto")
   
   return(saida)
 }
+
+
+
+
+
+
