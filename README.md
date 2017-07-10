@@ -32,7 +32,7 @@ da votação e as orientações das bancadas.
 Partidos
 - [X] `/partidos`: Os partidos políticos que têm ou já tiveram parlamentares em
 exercício na Câmara
-- [ ] `/partidos/{id}`: Informações detalhadas sobre um partido
+- [X] `/partidos/{id}`: Informações detalhadas sobre um partido
 
 Deputados
 - [X] `/deputados`: Listagem e busca de deputados, segundo critérios
