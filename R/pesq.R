@@ -168,7 +168,7 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
 }
 
 # Pesquisar eventos de um deputado
-pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
+pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
                                  data_fim = NULL, n_max = 15) {
   
   # Constantes da chamada
@@ -204,7 +204,7 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
 }
 
 # Pesquisar órgãos de um deputado
-pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
+pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
                                   data_fim = NULL, n_max = 15) {
   
   # Constantes da chamada
@@ -236,4 +236,3 @@ pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
   
   return(saida)
 }
-
