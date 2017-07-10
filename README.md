@@ -44,7 +44,7 @@ Legislaturas
 - [X] `/legislaturas`: Os períodos de mandatos e atividades parlamentares da Câmara
 - [X] `/legislaturas/{id}`: Informações extras sobre uma determinada legislatura
 da Câmara
-- [ ] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
+- [X] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
 legislatura
 
 Proposições

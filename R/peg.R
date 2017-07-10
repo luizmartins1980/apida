@@ -89,3 +89,23 @@ peg_legislatura <- function(id_legislatura) {
   
   return(saida)
 }
+
+# Pegar mesa
+peg_mesa <- function(id_legislatura) {
+  
+  # Constante da chamada
+  base <- "https://dadosabertos.camara.leg.br/api/v2/legislaturas/"
+  
+  # Construir chamada
+  cham <- stringr::str_c(base, id_legislatura, "/mesa")
+  
+  # Executar chamada
+  res <- jsonlite::fromJSON(cham)
+  
+  # Formatar resultados
+  saida <- tibble::as_tibble(res[[1]]) %>%
+    dplyr::select(id, nome, nomePapel)
+  names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
+  
+  return(saida)
+}
