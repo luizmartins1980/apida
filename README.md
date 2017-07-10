@@ -23,7 +23,6 @@ Blocos
 - [X] `/blocos/{id}`: Informações sobre um bloco partidário específico
 
 Votações
-- [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
 - [ ] `/votacoes/{id}`: Retorna um conjunto de informações mais detalhadas sobre a
 votação identificada por id, como o relator, o encaminhamento dado como consequência
 da votação e as orientações das bancadas.
@@ -40,10 +39,6 @@ Deputados
 - [X] `/deputados/{id}/despesas`: As despesas com exercício parlamentar do deputado
 - [X] `/deputados/{id}/eventos`: Uma lista de eventos com a participação do parlamentar
 - [X] `/deputados/{id}/orgaos`: Os órgãos dos quais um deputado é integrante
-- [ ] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
-legislatura
-- [ ] `/referencias/situacoesDeputado`: As possíveis situações de exercício parlamentar
-de um deputado
 
 Legislaturas
 - [X] `/legislaturas`: Os períodos de mandatos e atividades parlamentares da Câmara
@@ -51,6 +46,23 @@ Legislaturas
 da Câmara
 - [ ] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
 legislatura
+
+Proposições
+- [ ] `/proposicoes`: Lista configurável de proposições na Câmara
+- [ ] `/proposicoes/{id}`: Informações detalhadas sobre uma proposição específica
+- [ ] `/proposicoes/{id}/tramitacoes`: O histórico de passos na tramitação de uma
+proposta
+- [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
+
+Eventos
+- [ ] `/eventos`: Lista de eventos ocorridos ou previstos nos diversos órgãos da
+Câmara
+- [ ] `/eventos/{id}`: Informações detalhadas sobre um evento específico
+
+Órgãos
+- [ ] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara
+- [ ] `/orgaos/{id}`: Informações detalhadas sobre um órgão legislativo
+- [ ] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
 
 Referências
 - [ ] `/referencias/situacoesDeputado`: As possíveis situações de exercício parlamentar
@@ -63,26 +75,3 @@ proposição
 - [ ] `/referencias/tiposOrgao`: Os tipos de órgãos que existem na Câmara
 - [ ] `/referencias/tiposProposicao`: Os vários tipos de proposições existentes
 - [ ] `/referencias/uf`: Identificadores dos estados e do Distrito Federal
-
-Proposições
-- [ ] `/proposicoes`: Lista configurável de proposições na Câmara
-- [ ] `/proposicoes/{id}`: Informações detalhadas sobre uma proposição específica
-- [ ] `/proposicoes/{id}/tramitacoes`: O histórico de passos na tramitação de uma
-proposta
-- [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
-- [ ] `/referencias/situacoesProposicao`: Os possíveis estados de tramitação de uma
-proposição
-- [ ] `/referencias/tiposProposicao`: Os vários tipos de proposições existentes
-
-Eventos
-- [ ] `/eventos`: Lista de eventos ocorridos ou previstos nos diversos órgãos da
-Câmara
-- [ ] `/eventos/{id}`: Informações detalhadas sobre um evento específico
-- [ ] `/referencias/situacoesEvento`: As possíveis situações para eventos
-- [ ] `/referencias/tiposEvento`: Os tipos de eventos realizados na Câmara
-
-Órgãos
-- [ ] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara
-- [ ] `/orgaos/{id}`: Informações detalhadas sobre um órgão legislativo
-- [ ] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
-- [ ] `/referencias/situacoesOrgao`: As situações em que órgãos podem se encontrar
