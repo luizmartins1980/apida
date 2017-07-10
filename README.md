@@ -19,7 +19,7 @@ Funcionalidades gerais
 
 Blocos
 - [X] `/blocos`: Lista de dados sobre os blocos partidários
-- [ ] `/blocos/{id}`: Informações sobre um bloco partidário específico
+- [X] `/blocos/{id}`: Informações sobre um bloco partidário específico
 
 Votações
 - [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
