@@ -13,5 +13,6 @@ Imports:
   stringr,
   jsonlite,
   dplyr,
-  tibble
+  tibble,
+  purrr
 RoxygenNote: 6.0.1

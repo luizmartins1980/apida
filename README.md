@@ -36,7 +36,7 @@ exercício na Câmara
 
 Deputados
 - [X] `/deputados`: Listagem e busca de deputados, segundo critérios
-- [ ] `/deputados/{id}`: Informações detalhadas sobre um deputado específico
+- [X] `/deputados/{id}`: Informações detalhadas sobre um deputado específico
 - [X] `/deputados/{id}/despesas`: As despesas com exercício parlamentar do deputado
 - [X] `/deputados/{id}/eventos`: Uma lista de eventos com a participação do parlamentar
 - [X] `/deputados/{id}/orgaos`: Os órgãos dos quais um deputado é integrante

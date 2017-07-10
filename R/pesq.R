@@ -60,7 +60,7 @@ pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
   return(saida)
 }
 
-# Pesquisar deputado
+# Pesquisar deputados
 pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
                            sigla_partido = NULL, sigla_sexo = NULL,
                            n_max = 15) {

@@ -15,4 +15,4 @@ cria_param <- function(nome, vec) {
 magrittr::`%>%`
 
 # Livrar-se de alertas espúrios
-globalVariables("uri")
+globalVariables(c("uri", "nome", "uriPartido"))
