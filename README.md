@@ -55,9 +55,9 @@ proposta
 - [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
 
 Eventos
-- [ ] `/eventos`: Lista de eventos ocorridos ou previstos nos diversos órgãos da
+- [X] `/eventos`: Lista de eventos ocorridos ou previstos nos diversos órgãos da
 Câmara
-- [ ] `/eventos/{id}`: Informações detalhadas sobre um evento específico
+- [X] `/eventos/{id}`: Informações detalhadas sobre um evento específico
 
 Órgãos
 - [ ] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara

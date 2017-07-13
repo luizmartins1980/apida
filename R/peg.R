@@ -109,3 +109,31 @@ peg_mesa <- function(id_legislatura) {
   
   return(saida)
 }
+
+# Pegar evento
+peg_evento <- function(id_evento) {
+  
+  # Constante da chamada
+  base <- "https://dadosabertos.camara.leg.br/api/v2/eventos/"
+  
+  # Construir chamada
+  cham <- stringr::str_c(base, id_evento)
+  
+  # Executar chamada
+  res <- jsonlite::fromJSON(cham)
+  
+  # Formatar resultados
+  names(res$dados$orgaos) <- stringr::str_c(names(res$dados$orgaos), "_orgao")
+  names(res$dados$localCamara) <- stringr::str_c(names(res$dados$localCamara), "_local")
+  saida <- res$dados %>%
+    purrr::flatten() %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    tibble::as_tibble() %>%
+    dplyr::select(-uri, -uri_orgao)
+  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
+                    "descricao_tipo", "titulo", "id_orgao", "sigla_orgao", "nome_orgao",
+                    "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local", "sala_local",
+                    "andar_local")
+  
+  return(saida)
+}
