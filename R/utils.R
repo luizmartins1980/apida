@@ -53,9 +53,14 @@ chamar_api <- function(args, base, fim) {
   return(res$dados)
 }
 
+# Aplica as funções tail e head em sequência
+meio <- function(x, tail, head) {
+  x %>% utils::tail(tail) %>% utils::head(head)
+}
+
 #' @importFrom magrittr %>%
 magrittr::`%>%`
 
 # Livrar-se de alertas espúrios
 globalVariables(c("uri", "nome", "uriPartido", "data", "id",
-                  "nomePapel", "uriMembros", "uri_orgao"))
+                  "nomePapel", "uriMembros", "uri_orgao", "."))

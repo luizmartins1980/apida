@@ -4,7 +4,7 @@ pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
                         n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "blocos?"
   fim <- "ordem=ASC&ordenarPor=id"
   
@@ -23,7 +23,7 @@ pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
                           id_legislatura = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "partidos?"
   fim <- "ordem=ASC&ordenarPor=id"
   
@@ -43,7 +43,7 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
                            n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "deputados?"
   fim <- "ordem=ASC&ordenarPor=id"
   
@@ -63,7 +63,7 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
 pesq_legislaturas <- function(data = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "legislaturas?"
   fim <- "ordem=ASC&ordenarPor=id"
   
@@ -84,7 +84,7 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
                                    cnpj_cpf_fornecedor = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-2) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-2, -1)
   base <- stringr::str_c("deputados/", id_deputado, "/despesas?")
   fim <- "ordem=ASC&ordenarPor=numAno"
   
@@ -111,7 +111,7 @@ pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
                                  data_fim = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-2) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-2, -1)
   base <- stringr::str_c("deputados/", id_deputado, "/eventos?")
   fim <- "ordem=ASC&ordenarPor=dataInicio"
   
@@ -134,7 +134,7 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
                                   data_fim = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-2) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-2, -1)
   base <- stringr::str_c("deputados/", id_deputado, "/orgaos?")
   fim <- "ordem=ASC&ordenarPor=dataInicio"
   
@@ -157,7 +157,7 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
                          hora_inicio = NULL, hora_fim = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "eventos?"
   fim <- "ordem=ASC&ordenarPor=id"
   
@@ -188,7 +188,7 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
                              n_max = 15) {
   
   # Informações necessárias para chamar a API
-  args <- match.call() %>% as.list() %>% tail(-1) %>% head(-1)
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
   base <- "proposicoes?"
   fim <- "ordem=ASC&ordenarPor=id"
   
