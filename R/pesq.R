@@ -283,3 +283,27 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   
   return(saida)
 }
+
+# Pesquisar proposições
+pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
+                             sigla_partido_autor = NULL, numero = NULL, ano = NULL,
+                             data_aprensentacao_inicio = NULL,
+                             data_aprensentacao_fim = NULL, data_inicio = NULL,
+                             data_fim = NULL, id_autor = NULL, nome_autor = NULL,
+                             id_situacao = NULL, cod_partido = NULL, pagina = NULL) {
+  
+  # Informações necessárias para chamar a API
+  args <- match.call() %>% as.list() %>% tail(-1)
+  base <- "proposicoes?"
+  fim <- "ordem=ASC&ordenarPor=id"
+  
+  # Realizar chamada para a API
+  res <- chamar_api(args, base, fim)
+  
+  # Formatar resultados
+  saida <- res %>% tibble::as_tibble() %>% dplyr::select(-uri)
+  names(saida) <- c("id_proposicao", "sigla_tipo", "id_tipo",
+                    "numero", "ano", "ementa")
+  
+  return(saida)
+}
