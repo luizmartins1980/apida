@@ -238,35 +238,31 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
 }
 
 # Pesquisar eventos ocorridos ou previstos nos diversos órgãos da Câmara
-pesq_eventos <- function(idTipoEvento = NULL, 
-                         idSituacao = NULL,
-                         idTipoOrgao = NULL,
-                         idOrgao = NULL,
-                         dataInicio = NULL,
-                         dataFim = NULL,
-                         horaInicio = NULL,
-                         horaFim = NULL, n_max = 15) {
+pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
+                         id_tipo_orgao = NULL, id_orgao = NULL,
+                         data_inicio = NULL, data_fim = NULL,
+                         hora_inicio = NULL, hora_fim = NULL, n_max = 15) {
   
   # Constantes da chamada
   base <- "https://dadosabertos.camara.leg.br/api/v2/eventos?"
   fim <- "ordem=ASC&ordenarPor=id"
   
   # Criar listas de parâmetros
-  idTipoEvento <- cria_param("idTipoEvento", idTipoEvento)
-  idSituacao <- cria_param("idSituacao", idSituacao)
-  idTipoOrgao <- cria_param("idTipoOrgao", idTipoOrgao)
-  idOrgao <- cria_param("idOrgao", idOrgao)
-  dataInicio <- cria_param("dataInicio", dataInicio)
-  dataFim <- cria_param("dataFim", dataFim)
-  horaInicio <- cria_param("horaInicio", horaInicio)
-  horaFim <- cria_param("horaFim", horaFim)
+  id_tipo_evento <- cria_param("idTipoEvento", id_tipo_evento)
+  id_situacao <- cria_param("idSituacao", id_situacao)
+  id_tipo_orgao <- cria_param("idTipoOrgao", id_tipo_orgao)
+  id_orgao <- cria_param("idOrgao", id_orgao)
+  data_inicio <- cria_param("dataInicio", data_inicio)
+  data_fim <- cria_param("dataFim", data_fim)
+  hora_inicio <- cria_param("horaInicio", hora_inicio)
+  hora_fim <- cria_param("horaFim", hora_fim)
   
   # Unir todos os parâmetros da chamada
   params <- stringr::str_c(
-    idTipoEvento, idSituacao,
-    idTipoOrgao, idOrgao,
-    dataInicio, dataFim,
-    horaInicio, horaFim, fim, sep = "&")
+    id_tipo_evento, id_situacao,
+    id_tipo_orgao, id_orgao,
+    data_inicio, data_fim,
+    hora_inicio, hora_fim, fim, sep = "&")
   
   # Construir chamada
   cham <- stringr::str_c(base, params)
@@ -275,8 +271,12 @@ pesq_eventos <- function(idTipoEvento = NULL,
   res <- jsonlite::fromJSON(cham)
   
   # Formatar resultados
-  saida <- dplyr::select(res$dados, everything()) %>% tibble::as_tibble()
-  # names(saida) <- c("id_legislatura", "data_inicio", "data_fim")
+  names(res$dados$orgao) <- stringr::str_c(names(res$dados$orgao), "_orgao")
+  names(res$dados$localCamara) <- stringr::str_c(names(res$dados$localCamara), "_local")
+  res$dados <- res$dados %>% append(res$dados$orgao) %>% append(res$dados$localCamara)
+  res$dados$orgao <- NULL; res$dados$localCamara <- NULL
+  saida <- tibble::as_tibble(res$dados) %>% dplyr::select(-uri, -uri_orgao)
+  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao")
   
   return(saida)
 }
