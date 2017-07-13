@@ -263,7 +263,7 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
     id_tipo_orgao, id_orgao,
     data_inicio, data_fim,
     hora_inicio, hora_fim, fim, sep = "&")
-  
+   
   # Construir chamada
   cham <- stringr::str_c(base, params)
   
@@ -276,7 +276,10 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   res$dados <- res$dados %>% append(res$dados$orgao) %>% append(res$dados$localCamara)
   res$dados$orgao <- NULL; res$dados$localCamara <- NULL
   saida <- tibble::as_tibble(res$dados) %>% dplyr::select(-uri, -uri_orgao)
-  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao")
+  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
+                    "descricao_tipo", "titulo", "local_externo", "id_orgao", "sigla_orgao",
+                    "nome_orgao", "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local",
+                    "sala_local", "andar_local")
   
   return(saida)
 }
