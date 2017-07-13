@@ -19,8 +19,7 @@ snake_to_camel <- function(string) {
     len = stringr::str_length(x)
     stringr::str_c(
       fun(stringr::str_sub(x, 1, 1)),
-      stringr::str_sub(x, 2, len),
-      collapse = "")
+      stringr::str_sub(x, 2, len))
   }
   
   # Transformações necessárias para "camel case"

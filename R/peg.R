@@ -113,27 +113,60 @@ peg_mesa <- function(id_legislatura) {
 # Pegar evento
 peg_evento <- function(id_evento) {
   
-  # Constante da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/eventos/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "eventos/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_evento)
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
-  
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_evento) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
+
   # Formatar resultados
-  names(res$dados$orgaos) <- stringr::str_c(names(res$dados$orgaos), "_orgao")
-  names(res$dados$localCamara) <- stringr::str_c(names(res$dados$localCamara), "_local")
-  saida <- res$dados %>%
+  names(res$orgaos) <- stringr::str_c(names(res$orgaos), "_orgao")
+  names(res$localCamara) <- stringr::str_c(names(res$localCamara), "_local")
+  saida <- res %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
     purrr::flatten() %>%
     purrr::modify_if(~length(.x) == 0, ~NA) %>%
     tibble::as_tibble() %>%
-    dplyr::select(-uri, -uri_orgao)
-  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
-                    "descricao_tipo", "titulo", "id_orgao", "sigla_orgao", "nome_orgao",
-                    "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local", "sala_local",
+    dplyr::select(id, dplyr::everything(), -dplyr::starts_with("uri"))
+  names(saida) <- c("id_evento", "fases", "datahora_inicio", "datahora_fim",
+                    "descricao_situacao", "descricao_tipo", "titulo", "local_externo",
+                    "id_orgao", "sigla_orgao", "nome_orgao", "id_tipo_orgao",
+                    "tipo_orgao", "nome_local", "predio_local", "sala_local",
                     "andar_local")
+  
+  return(saida)
+}
+
+# Pegar proposição
+peg_proposicao <- function(id_proposicao) {
+  
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "proposicoes/"
+  
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_proposicao) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
+  
+  # Formatar resultados
+  saida <- res %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    purrr::flatten() %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    tibble::as_tibble() %>%
+    dplyr::select(-dplyr::starts_with("uri"))
+  names(saida) <- c("id_proposicao", "sigla_tipo", "id_tipo",
+                    "numero", "ano", "ementa", "data_apresentacao",
+                    "datahora", "sequencia", "sigla_orgao", "regime",
+                    "descricao_tramitacao", "id_tipo_tramitacao",
+                    "descricao_situacao", "id_situacao", "despacho",
+                    "url", "tipo_autor", "id_tipo_autor", "descricao_tipo",
+                    "ementa_detalhada", "keywords", "url_inteiro_teor",
+                    "urn_final", "texto", "justificativa")
   
   return(saida)
 }
