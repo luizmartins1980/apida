@@ -49,7 +49,7 @@ legislatura
 
 Proposições
 - [X] `/proposicoes`: Lista configurável de proposições na Câmara
-- [ ] `/proposicoes/{id}`: Informações detalhadas sobre uma proposição específica
+- [X] `/proposicoes/{id}`: Informações detalhadas sobre uma proposição específica
 - [ ] `/proposicoes/{id}/tramitacoes`: O histórico de passos na tramitação de uma
 proposta
 - [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou

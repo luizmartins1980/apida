@@ -1,17 +1,17 @@
 # Pegar bloco
 peg_bloco <- function(id_bloco) {
   
-  # Constante da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/blocos/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "blocos/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_bloco)
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_bloco) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res$dados) %>% dplyr::select(-uri)
+  saida <- tibble::as_tibble(res) %>% dplyr::select(-uri)
   names(saida) <- c("id_bloco", "siglas_partidos", "id_legislatura")
   
   return(saida)
@@ -20,17 +20,17 @@ peg_bloco <- function(id_bloco) {
 # Pegar partido
 peg_partido <- function(id_partido) {
   
-  # Constante da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/partidos/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "partidos/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_partido)
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
-  
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_partido) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
+
   # Formatar resultados
-  res$dados$status$lider <- res$dados$status$lider$id
+  res$status$lider <- res$status$lider$id
   saida <- res$dados %>%
     purrr::modify_if(~length(.x) == 0, ~NA) %>%
     purrr::flatten_df() %>%
@@ -47,18 +47,21 @@ peg_partido <- function(id_partido) {
 # Pegar deputado
 peg_deputado <- function(id_deputado) {
   
-  # Constantes da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/deputados/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "deputados/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_deputado)
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_deputado) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
   
   # Formatar resultados
-  saida <- res$dados %>% purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten() %>% purrr::flatten_df() %>%
+  saida <- res %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    purrr::flatten() %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    purrr::flatten_df() %>%
     dplyr::select(-uri, -nome, -uriPartido, -data)
   nomes <- c("id_deputado", "nome_deputado", "sigla_partido",
              "sigla_uf", "id_legislatura", "url_foto", "nome_eleitoral",
@@ -74,17 +77,17 @@ peg_deputado <- function(id_deputado) {
 # Pegar legislatura
 peg_legislatura <- function(id_legislatura) {
   
-  # Constante da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/legislaturas/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "legislaturas/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_legislatura)
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_legislatura) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res$dados) %>% dplyr::select(-uri)
+  saida <- tibble::as_tibble(res) %>% dplyr::select(-uri)
   names(saida) <- c("id_legislatura", "data_inicio", "data_fim")
   
   return(saida)
@@ -93,17 +96,17 @@ peg_legislatura <- function(id_legislatura) {
 # Pegar mesa
 peg_mesa <- function(id_legislatura) {
   
-  # Constante da chamada
-  base <- "https://dadosabertos.camara.leg.br/api/v2/legislaturas/"
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "legislaturas/"
   
-  # Construir chamada
-  cham <- stringr::str_c(base, id_legislatura, "/mesa")
-  
-  # Executar chamada
-  res <- jsonlite::fromJSON(cham)
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_legislatura, "/mesa") %>% 
+    jsonlite::fromJSON() %>%
+    .[[1]]
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res[[1]]) %>%
+  saida <- tibble::as_tibble(res) %>%
     dplyr::select(id, nome, nomePapel)
   names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
   
