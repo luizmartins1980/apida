@@ -65,13 +65,13 @@ Câmara
 - [X] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
 
 Referências
-- [ ] `/referencias/situacoesDeputado`: As possíveis situações de exercício parlamentar
+- [X] `/referencias/situacoesDeputado`: As possíveis situações de exercício parlamentar
 de um deputado
-- [ ] `/referencias/situacoesEvento`: As possíveis situações para eventos
-- [ ] `/referencias/situacoesOrgao`: As situações em que órgãos podem se encontrar
-- [ ] `/referencias/situacoesProposicao`: Os possíveis estados de tramitação de uma
+- [X] `/referencias/situacoesEvento`: As possíveis situações para eventos
+- [X] `/referencias/situacoesOrgao`: As situações em que órgãos podem se encontrar
+- [X] `/referencias/situacoesProposicao`: Os possíveis estados de tramitação de uma
 proposição
-- [ ] `/referencias/tiposEvento`: Os tipos de eventos realizados na Câmara
-- [ ] `/referencias/tiposOrgao`: Os tipos de órgãos que existem na Câmara
-- [ ] `/referencias/tiposProposicao`: Os vários tipos de proposições existentes
-- [ ] `/referencias/uf`: Identificadores dos estados e do Distrito Federal
+- [X] `/referencias/tiposEvento`: Os tipos de eventos realizados na Câmara
+- [X] `/referencias/tiposOrgao`: Os tipos de órgãos que existem na Câmara
+- [X] `/referencias/tiposProposicao`: Os vários tipos de proposições existentes
+- [X] `/referencias/uf`: Identificadores dos estados e do Distrito Federal

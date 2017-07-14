@@ -198,3 +198,26 @@ peg_orgao <- function(id_orgao) {
   
   return(saida)
 }
+
+# Função para pegar as tabelas de referências
+#
+# situacoesDeputado, situacoesEvento, situacoesOrgao
+# situacoesProposicao, tiposEvento, tiposOrgao
+# tiposProposicao, uf
+# 
+peg_referencia <- function(tipo_referencia) {
+  
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "referencias/"
+  
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, tipo_referencia) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
+  
+  # Formatar resultados
+  saida <- tibble::as_tibble(res) %>% purrr::discard(~all(.x == ""))
+  
+  return(saida)
+}

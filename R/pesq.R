@@ -1,4 +1,3 @@
-
 # Pesquisar blocos
 pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
                         n_max = 15) {

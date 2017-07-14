@@ -1,4 +1,3 @@
-
 # Criar listas de parâmetros
 cria_param <- function(nome, vec) {
   
@@ -33,6 +32,15 @@ snake_to_camel <- function(string) {
   return(purrr::map_chr(string, to_camel))
 }
 
+# Trocar um conjunto de strings de "camel case" para "snake case"
+camel_to_snake <- function(string) {
+    
+  # Converter cases
+  string %>%
+    purrr::map_chr(~stringr::str_replace_all(.x, "([A-Z])", "_\\1")) %>%
+    stringr::str_to_lower()
+}
+
 # Realizar uma chamada para a API
 chamar_api <- function(args, base, fim) {
   
@@ -63,4 +71,5 @@ magrittr::`%>%`
 
 # Livrar-se de alertas espúrios
 globalVariables(c("uri", "nome", "uriPartido", "data", "id",
-                  "nomePapel", "uriMembros", "uri_orgao", "."))
+                  "nomePapel", "uriMembros", "uri_orgao", ".",
+                  "uriOrgao"))
