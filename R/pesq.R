@@ -222,11 +222,12 @@ pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
   return(saida)
 }
 
+# Pesquisar tramitações de uma proposição
 pesq_tramitacoes_proposicao <- function(id_proposicao) {
   
   # Informações necessárias para chamar a API
   args <- match.call() %>% as.list() %>% meio(-2, -1)
-  base <- stringr::str_c("proposicoes/", id_proposicao, "/tramitacoes?")
+  base <- stringr::str_c("proposicoes/", id_proposicao, "/tramitacoes")
   fim <- ""
   
   # Realizar chamada para a API
@@ -241,17 +242,18 @@ pesq_tramitacoes_proposicao <- function(id_proposicao) {
   return(saida)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# # Pesquisar votações de uma proposição
+# pesq_votacoes_proposicao <- function(id_proposicao) {
+#   
+#   # Informações necessárias para chamar a API
+#   args <- match.call() %>% as.list() %>% meio(-2, -1)
+#   base <- stringr::str_c("proposicoes/", id_proposicao, "/votacoes")
+#   fim <- ""
+#   
+#   # Realizar chamada para a API
+#   res <- chamar_api(args, base, fim)
+#   
+#   # Formatar resultados
+#   
+#   return(saida)
+# }
