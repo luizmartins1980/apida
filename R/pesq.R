@@ -257,3 +257,27 @@ pesq_tramitacoes_proposicao <- function(id_proposicao) {
 #   
 #   return(saida)
 # }
+
+pesq_eventos_orgao <- function(id_orgao, id_tipo_evento = NULL, n_max = 15) {
+  
+  # Informações necessárias para chamar a API
+  args <- match.call() %>% as.list() %>% meio(-2, -1)
+  base <- stringr::str_c("orgaos/", id_orgao, "/eventos")
+  fim <- ""
+  
+  # Realizar chamada para a API
+  res <- chamar_api(args, base, fim)
+  
+  # Formatar resultados
+  names(res$orgao) <- stringr::str_c(names(res$orgao), "_orgao")
+  names(res$localCamara) <- stringr::str_c(names(res$localCamara), "_local")
+  res <- res %>% append(res$orgao) %>% append(res$localCamara)
+  res$orgao <- NULL; res$localCamara <- NULL
+  saida <- tibble::as_tibble(res) %>% dplyr::select(-uri, -uri_orgao)
+  names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
+                    "descricao_tipo", "titulo", "local_externo", "id_orgao", "sigla_orgao",
+                    "nome_orgao", "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local",
+                    "sala_local", "andar_local")
+  
+  return(saida)
+}

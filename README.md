@@ -13,7 +13,8 @@ trazem informações mais profundas sobre um elemento específico da categoria e
 ## A fazer
 
 Este pacote está em desenvolvimento ativo! Aqui está uma lista do que já foi feito
-e do que ainda há de ser feito.
+e do que ainda há de ser feito (OBS.: as funções relacionadas a votações não foram
+implementadas porque a API ainda não as suporta).
 
 Funcionalidades gerais
 - [ ] Implementar `n_max`
@@ -61,7 +62,7 @@ Câmara
 Órgãos
 - [X] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara
 - [X] `/orgaos/{id}`: Informações detalhadas sobre um órgão legislativo
-- [ ] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
+- [X] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
 
 Referências
 - [ ] `/referencias/situacoesDeputado`: As possíveis situações de exercício parlamentar
