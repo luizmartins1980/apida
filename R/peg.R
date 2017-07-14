@@ -173,3 +173,28 @@ peg_proposicao <- function(id_proposicao) {
   
   return(saida)
 }
+
+# Pegar órgãos legislativos
+peg_orgao <- function(id_orgao) {
+  
+  # Informações necessárias para chamar a API
+  url <- "https://dadosabertos.camara.leg.br/api/v2/"
+  base <- "orgaos/"
+  
+  # Realizar chamada para a API
+  res <- stringr::str_c(url, base, id_orgao) %>% 
+    jsonlite::fromJSON() %>%
+    .$dados
+  
+  # Formatar resultados
+  saida <- res %>%
+    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+    tibble::as_tibble() %>%
+    dplyr::select(-uri)
+  names(saida) <- c("id_orgao", "sigla_orgao", "nome_orgao",
+                    "id_tipo_orgao", "tipo_orgao", "data_inicio",
+                    "data_instalacao", "data_fim", "data_fim_original",
+                    "casa", "sala", "url_website")
+  
+  return(saida)
+}

@@ -60,8 +60,8 @@ Câmara
 - [X] `/eventos/{id}`: Informações detalhadas sobre um evento específico
 
 Órgãos
-- [ ] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara
-- [ ] `/orgaos/{id}`: Informações detalhadas sobre um órgão legislativo
+- [X] `/orgaos`: A lista das comissões e outros órgãos legislativos da Câmara
+- [X] `/orgaos/{id}`: Informações detalhadas sobre um órgão legislativo
 - [ ] `/orgaos/{id}/eventos`: Informações detalhadas sobre um órgão legislativo
 
 Referências

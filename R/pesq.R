@@ -184,8 +184,7 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
                              data_aprensentacao_inicio = NULL,
                              data_aprensentacao_fim = NULL, data_inicio = NULL,
                              data_fim = NULL, id_autor = NULL, nome_autor = NULL,
-                             id_situacao = NULL, cod_partido = NULL, pagina = NULL,
-                             n_max = 15) {
+                             id_situacao = NULL, cod_partido = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
   args <- match.call() %>% as.list() %>% meio(-1, -1)
@@ -199,6 +198,26 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
   saida <- res %>% tibble::as_tibble() %>% dplyr::select(-uri)
   names(saida) <- c("id_proposicao", "sigla_tipo", "id_tipo",
                     "numero", "ano", "ementa")
+  
+  return(saida)
+}
+
+# Pesquisar órgãos legislativos
+pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
+                        data_fim = NULL, n_max = 15) {
+  
+  # Informações necessárias para chamar a API
+  args <- match.call() %>% as.list() %>% meio(-1, -1)
+  base <- "orgaos?"
+  fim <- "ordem=ASC&ordenarPor=sigla"
+  
+  # Realizar chamada para a API
+  res <- chamar_api(args, base, fim)
+  
+  # Formatar resultados
+  saida <- res %>% tibble::as_tibble() %>% dplyr::select(-uri)
+  names(saida) <- c("id_orgao", "sigla_orgao", "nome_orgao",
+                    "id_tipo_orgao", "tipo_orgao")
   
   return(saida)
 }
