@@ -24,8 +24,7 @@ Blocos
 
 Votações
 - [ ] `/votacoes/{id}`: Retorna um conjunto de informações mais detalhadas sobre a
-votação identificada por id, como o relator, o encaminhamento dado como consequência
-da votação e as orientações das bancadas.
+votação identificada por id
 - [ ] `/votacoes/{id}/votos`: Listagem de votantes
 
 Partidos
@@ -50,7 +49,7 @@ legislatura
 Proposições
 - [X] `/proposicoes`: Lista configurável de proposições na Câmara
 - [X] `/proposicoes/{id}`: Informações detalhadas sobre uma proposição específica
-- [ ] `/proposicoes/{id}/tramitacoes`: O histórico de passos na tramitação de uma
+- [X] `/proposicoes/{id}/tramitacoes`: O histórico de passos na tramitação de uma
 proposta
 - [ ] `/proposicoes/{id}/votacoes`: As votações por quais uma proposição já passou
 

@@ -221,3 +221,37 @@ pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
   
   return(saida)
 }
+
+pesq_tramitacoes_proposicao <- function(id_proposicao) {
+  
+  # Informações necessárias para chamar a API
+  args <- match.call() %>% as.list() %>% meio(-2, -1)
+  base <- stringr::str_c("proposicoes/", id_proposicao, "/tramitacoes?")
+  fim <- ""
+  
+  # Realizar chamada para a API
+  res <- chamar_api(args, base, fim)
+  
+  # Formatar resultados
+  saida <- tibble::as_tibble(res) %>% dplyr::select(-uriOrgao)
+  names(saida) <- c("data_hora", "sequencia", "sigla_orgao",
+                    "regime", "descricao_tramitacao", "id_tipo_tramitacao",
+                    "descricao_situacao", "id_situacao", "despacho", "url")
+  
+  return(saida)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
