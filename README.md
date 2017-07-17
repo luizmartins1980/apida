@@ -18,6 +18,8 @@ implementadas porque a API ainda não as suporta).
 
 Funcionalidades gerais
 - [X] Implementar `n_max`
+- [X] Implementar testes
+- [ ] Documentar funções
 
 Blocos
 - [X] `/blocos`: Lista de dados sobre os blocos partidários

@@ -57,11 +57,11 @@ chamar_api <- function(args, base, n_max) {
     stringr::str_c(base, .)
   
   # Realizar primeira chamada e preparar loop
-  res <- jsonlite::fromJSON(cham)
-  dados <- res$dados
+  res <- jsonlite::fromJSON(cham); dados <- res$dados
+  if (length(dados) == 0) { return(dados) }
   
   # Repetir chamada caso necessário
-  while (length(dados[[1]]) < n_max & !is.null(res$links)) {
+  while (!is.null(res$links) & length(dados[[1]]) < n_max) {
     
     # Realizar chamada
     res <- jsonlite::fromJSON(res$links$href[2])

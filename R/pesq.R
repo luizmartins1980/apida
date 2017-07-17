@@ -8,6 +8,7 @@ pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
@@ -26,6 +27,7 @@ pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
@@ -45,6 +47,7 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% 
@@ -64,6 +67,7 @@ pesq_legislaturas <- function(data = NULL, n_max = 15) {
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
@@ -84,6 +88,7 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>%
@@ -110,6 +115,7 @@ pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
@@ -132,6 +138,7 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados)
@@ -154,6 +161,7 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
 
   # Formatar resultados
   names(dados$orgao) <- stringr::str_c(names(dados$orgao), "_orgao")
@@ -183,6 +191,7 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- dados %>% tibble::as_tibble() %>% dplyr::select(-uri)
@@ -202,6 +211,7 @@ pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- dados %>% tibble::as_tibble() %>% dplyr::select(-uri)
@@ -220,6 +230,7 @@ pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% dplyr::select(-uriOrgao)
@@ -239,6 +250,7 @@ pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
 #   
 #   # Realizar chamada para a API
 #   dados <- chamar_api(args, base, n_max)
+#   if (length(dados) == 0) { return(dados) }
 #   
 #   # Formatar resultados
 #   
@@ -253,6 +265,7 @@ pesq_eventos_orgao <- function(id_orgao, id_tipo_evento = NULL, n_max = 15) {
   
   # Realizar chamada para a API
   dados <- chamar_api(args, base, n_max)
+  if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
   names(dados$orgao) <- stringr::str_c(names(dados$orgao), "_orgao")
