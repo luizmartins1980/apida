@@ -51,7 +51,7 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
   
   # Formatar resultados
   saida <- tibble::as_tibble(dados) %>% 
-    dplyr::select(-dplyr::starts_with("uri"))
+    dplyr::select(-dplyr::contains("uri"))
   names(saida) <- c("id_deputado", "nome_deputado", "sigla_partido",
                     "sigla_uf", "id_legislatura", "url_foto")
   
@@ -91,9 +91,7 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
-  saida <- tibble::as_tibble(dados) %>%
-    dplyr::mutate_at(.vars = c(1, 2, 8, 12, 13, 16),
-                     .funs = as.numeric)
+  saida <- tibble::as_tibble(dados)
   names(saida) <- c("ano", "mes", "tipo_despesa",
                     "id_documento", "tipo_documento",
                     "data_documento", "num_documento",
@@ -164,11 +162,10 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   if (length(dados) == 0) { return(dados) }
 
   # Formatar resultados
-  names(dados$orgao) <- stringr::str_c(names(dados$orgao), "_orgao")
-  names(dados$localCamara) <- stringr::str_c(names(dados$localCamara), "_local")
-  dados <- dados %>% append(dados$orgao) %>% append(dados$localCamara)
-  dados$orgao <- NULL; dados$localCamara <- NULL
-  saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri, -uri_orgao)
+  saida <- dados %>%
+    rlist::list.flatten() %>%
+    tibble::as_tibble() %>%
+    dplyr::select(-dplyr::contains("uri"))
   names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
                     "descricao_tipo", "titulo", "local_externo", "id_orgao", "sigla_orgao",
                     "nome_orgao", "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local",
@@ -268,11 +265,10 @@ pesq_eventos_orgao <- function(id_orgao, id_tipo_evento = NULL, n_max = 15) {
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
-  names(dados$orgao) <- stringr::str_c(names(dados$orgao), "_orgao")
-  names(dados$localCamara) <- stringr::str_c(names(dados$localCamara), "_local")
-  dados <- dados %>% append(dados$orgao) %>% append(dados$localCamara)
-  dados$orgao <- NULL; dados$localCamara <- NULL
-  saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri, -uri_orgao)
+  saida <- dados %>%
+    rlist::list.flatten() %>%
+    tibble::as_tibble() %>%
+    dplyr::select(-dplyr::contains("uri"))
   names(saida) <- c("id_evento", "datahora_inicio", "datahora_fim", "descricao_situacao",
                     "descricao_tipo", "titulo", "local_externo", "id_orgao", "sigla_orgao",
                     "nome_orgao", "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local",

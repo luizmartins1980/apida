@@ -19,7 +19,7 @@ implementadas porque a API ainda não as suporta).
 Geral
 - [X] Implementar `n_max`
 - [X] Implementar testes
-- [ ] `peg_*` recebem vetores
+- [X] `peg_*` recebem vetores
 - [ ] Documentar funções
 
 Blocos
