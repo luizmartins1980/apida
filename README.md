@@ -13,7 +13,7 @@ trazem informações mais profundas sobre um elemento específico da categoria e
 ## A fazer
 
 Este pacote está em desenvolvimento ativo! Aqui está uma lista do que já foi feito
-e do que ainda há de ser feito (OBS.: as funções relacionadas a votações não foram
+e do que ainda há de ser feito (OBS.: as funções relacionadas a votações e mesas não foram
 implementadas porque a API ainda não as suporta).
 
 Funcionalidades gerais
@@ -44,7 +44,7 @@ Legislaturas
 - [X] `/legislaturas`: Os períodos de mandatos e atividades parlamentares da Câmara
 - [X] `/legislaturas/{id}`: Informações extras sobre uma determinada legislatura
 da Câmara
-- [X] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
+- [ ] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
 legislatura
 
 Proposições

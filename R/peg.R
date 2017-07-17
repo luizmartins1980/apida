@@ -31,7 +31,7 @@ peg_partido <- function(id_partido) {
 
   # Formatar resultados
   res$status$lider <- res$status$lider$id
-  saida <- res$dados %>%
+  saida <- res %>%
     purrr::modify_if(~length(.x) == 0, ~NA) %>%
     purrr::flatten_df() %>%
     dplyr::select(-uri, -uriMembros, -data)
@@ -94,24 +94,24 @@ peg_legislatura <- function(id_legislatura) {
 }
 
 # Pegar mesa
-peg_mesa <- function(id_legislatura) {
-  
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "legislaturas/"
-  
-  # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_legislatura, "/mesa") %>% 
-    jsonlite::fromJSON() %>%
-    .[[1]]
-  
-  # Formatar resultados
-  saida <- tibble::as_tibble(res) %>%
-    dplyr::select(id, nome, nomePapel)
-  names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
-  
-  return(saida)
-}
+# peg_mesa <- function(id_legislatura) {
+#   
+#   # Informações necessárias para chamar a API
+#   url <- "https://dadosabertos.camara.leg.br/api/v2/"
+#   base <- "legislaturas/"
+#   
+#   # Realizar chamada para a API
+#   res <- stringr::str_c(url, base, id_legislatura, "/mesa") %>% 
+#     jsonlite::fromJSON() %>%
+#     .[[1]]
+#   
+#   # Formatar resultados
+#   saida <- tibble::as_tibble(res) %>%
+#     dplyr::select(id, nome, nomePapel)
+#   names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
+#   
+#   return(saida)
+# }
 
 # Pegar evento
 peg_evento <- function(id_evento) {
