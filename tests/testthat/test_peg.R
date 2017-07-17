@@ -6,7 +6,7 @@ test_that("As funções peg_* retornam objetos do formato esperado", {
   
   # Funções peg_* normais
   expect_equal(dim(peg_bloco(570)), c(1, 3))
-  expect_equal(dim(peg_deputado(73441)), c(1, 24))
+  expect_equal(dim(peg_deputado(73441)), c(1, 23))
   expect_equal(dim(peg_evento(48092)), c(1, 17))
   expect_equal(dim(peg_legislatura(13)), c(1, 3))
   # expect_equal(dim(peg_mesa(13)), c(15, 0))

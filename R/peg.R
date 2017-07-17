@@ -1,17 +1,12 @@
 # Pegar bloco
 peg_bloco <- function(id_bloco) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "blocos/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_bloco) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "blocos/"
+  dados <- peg_api(base, id_bloco)
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res) %>% dplyr::select(-uri)
+  saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
   names(saida) <- c("id_bloco", "siglas_partidos", "id_legislatura")
   
   return(saida)
@@ -20,21 +15,18 @@ peg_bloco <- function(id_bloco) {
 # Pegar partido
 peg_partido <- function(id_partido) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "partidos/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_partido) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "partidos/"
+  dados <- peg_api(base, id_partido)
 
   # Formatar resultados
-  res$status$lider <- res$status$lider$id
-  saida <- res %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten_df() %>%
-    dplyr::select(-uri, -uriMembros, -data)
+  dados$status$lider <- dados$status$lider$id
+  saida <- dados %>%
+    rlist::list.flatten() %>%
+    tibble::as_tibble() %>%
+    dplyr::select(
+      -dplyr::contains("uri"),
+      -status.data)
   names(saida) <- c("id_partido", "sigla_partido", "nome_partido",
                     "id_legislatura", "situacao", "total_posse",
                     "total_membros", "id_deputado_lider",
@@ -47,23 +39,21 @@ peg_partido <- function(id_partido) {
 # Pegar deputado
 peg_deputado <- function(id_deputado) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "deputados/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_deputado) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "deputados/"
+  dados <- peg_api(base, id_deputado)
   
   # Formatar resultados
-  saida <- res %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten() %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten_df() %>%
-    dplyr::select(-uri, -nome, -uriPartido, -data)
-  nomes <- c("id_deputado", "nome_deputado", "sigla_partido",
+  saida <- dados %>%
+    rlist::list.flatten() %>%
+    tibble::as_tibble() %>%
+    dplyr::select(
+      -dplyr::contains("uri"),
+      -ultimoStatus.nome,
+      -ultimoStatus.data,
+      -ultimoStatus.id,
+      -ultimoStatus.gabinete.nome)
+  names(saida) <- c("id_deputado", "nome_deputado", "sigla_partido",
              "sigla_uf", "id_legislatura", "url_foto", "nome_eleitoral",
              "predio_escritorio", "sala_escritorio", "andar_escritorio",
              "telefone_escritorio", "email_escritorio", "situacao",
@@ -77,17 +67,12 @@ peg_deputado <- function(id_deputado) {
 # Pegar legislatura
 peg_legislatura <- function(id_legislatura) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "legislaturas/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_legislatura) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "legislaturas/"
+  dados <- peg_api(base, id_legislatura)
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res) %>% dplyr::select(-uri)
+  saida <- tibble::as_tibble(dados) %>% dplyr::select(-uri)
   names(saida) <- c("id_legislatura", "data_inicio", "data_fim")
   
   return(saida)
@@ -96,17 +81,12 @@ peg_legislatura <- function(id_legislatura) {
 # Pegar mesa
 # peg_mesa <- function(id_legislatura) {
 #   
-#   # Informações necessárias para chamar a API
-#   url <- "https://dadosabertos.camara.leg.br/api/v2/"
-#   base <- "legislaturas/"
-#   
 #   # Realizar chamada para a API
-#   res <- stringr::str_c(url, base, id_legislatura, "/mesa") %>% 
-#     jsonlite::fromJSON() %>%
-#     .[[1]]
+#   base <- "legislaturas/"
+#   dados <- peg_api(base, id_legislatura, "/mesa")
 #   
 #   # Formatar resultados
-#   saida <- tibble::as_tibble(res) %>%
+#   saida <- tibble::as_tibble(dados) %>%
 #     dplyr::select(id, nome, nomePapel)
 #   names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
 #   
@@ -116,29 +96,22 @@ peg_legislatura <- function(id_legislatura) {
 # Pegar evento
 peg_evento <- function(id_evento) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "eventos/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_evento) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
-
+  base <- "eventos/"
+  dados <- peg_api(base, id_evento)
+  
   # Formatar resultados
-  names(res$orgaos) <- stringr::str_c(names(res$orgaos), "_orgao")
-  names(res$localCamara) <- stringr::str_c(names(res$localCamara), "_local")
-  saida <- res %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten() %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+  saida <- dados %>%
+    rlist::list.flatten() %>%
     tibble::as_tibble() %>%
-    dplyr::select(id, dplyr::everything(), -dplyr::starts_with("uri"))
+    dplyr::select(
+      id, dplyr::everything(),
+      -dplyr::contains("uri"))
   names(saida) <- c("id_evento", "fases", "datahora_inicio", "datahora_fim",
-                    "descricao_situacao", "descricao_tipo", "titulo", "local_externo",
-                    "id_orgao", "sigla_orgao", "nome_orgao", "id_tipo_orgao",
-                    "tipo_orgao", "nome_local", "predio_local", "sala_local",
-                    "andar_local")
+                    "descricao_situacao", "descricao_tipo", "titulo",
+                    "local_externo", "id_orgao", "sigla_orgao", "nome_orgao",
+                    "id_tipo_orgao", "tipo_orgao", "nome_local", "predio_local",
+                    "sala_local", "andar_local")
   
   return(saida)
 }
@@ -146,22 +119,15 @@ peg_evento <- function(id_evento) {
 # Pegar proposição
 peg_proposicao <- function(id_proposicao) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "proposicoes/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_proposicao) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "proposicoes/"
+  dados <- peg_api(base, id_proposicao)
   
   # Formatar resultados
-  saida <- res %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
-    purrr::flatten() %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+  saida <- dados %>%
+    rlist::list.flatten() %>%
     tibble::as_tibble() %>%
-    dplyr::select(-dplyr::starts_with("uri"))
+    dplyr::select(-dplyr::contains("uri"))
   names(saida) <- c("id_proposicao", "sigla_tipo", "id_tipo",
                     "numero", "ano", "ementa", "data_apresentacao",
                     "datahora", "sequencia", "sigla_orgao", "regime",
@@ -177,18 +143,12 @@ peg_proposicao <- function(id_proposicao) {
 # Pegar órgãos legislativos
 peg_orgao <- function(id_orgao) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "orgaos/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, id_orgao) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "orgaos/"
+  dados <- peg_api(base, id_orgao)
   
   # Formatar resultados
-  saida <- res %>%
-    purrr::modify_if(~length(.x) == 0, ~NA) %>%
+  saida <- dados %>%
     tibble::as_tibble() %>%
     dplyr::select(-uri)
   names(saida) <- c("id_orgao", "sigla_orgao", "nome_orgao",
@@ -207,17 +167,12 @@ peg_orgao <- function(id_orgao) {
 # 
 peg_referencia <- function(tipo_referencia) {
   
-  # Informações necessárias para chamar a API
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- "referencias/"
-  
   # Realizar chamada para a API
-  res <- stringr::str_c(url, base, tipo_referencia) %>% 
-    jsonlite::fromJSON() %>%
-    .$dados
+  base <- "referencias/"
+  dados <- peg_api(base, tipo_referencia)
   
   # Formatar resultados
-  saida <- tibble::as_tibble(res) %>% purrr::discard(~all(.x == ""))
+  saida <- tibble::as_tibble(dados) %>% purrr::discard(~all(.x == ""))
   
   return(saida)
 }

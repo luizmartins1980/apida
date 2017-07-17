@@ -7,7 +7,7 @@ pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
   base <- "blocos?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -26,7 +26,7 @@ pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
   base <- "partidos?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -46,7 +46,7 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
   base <- "deputados?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -66,7 +66,7 @@ pesq_legislaturas <- function(data = NULL, n_max = 15) {
   base <- "legislaturas?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -87,7 +87,7 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
   base <- stringr::str_c("deputados/", id_deputado, "/despesas?")
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -114,7 +114,7 @@ pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
   base <- stringr::str_c("deputados/", id_deputado, "/eventos?")
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -137,7 +137,7 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
   base <- stringr::str_c("deputados/", id_deputado, "/orgaos?")
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -160,7 +160,7 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   base <- "eventos?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
 
   # Formatar resultados
@@ -190,7 +190,7 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
   base <- "proposicoes?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -210,7 +210,7 @@ pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
   base <- "orgaos?"
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -229,7 +229,7 @@ pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
   base <- stringr::str_c("proposicoes/", id_proposicao, "/tramitacoes")
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados
@@ -249,7 +249,7 @@ pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
 #   base <- stringr::str_c("proposicoes/", id_proposicao, "/votacoes")
 #   
 #   # Realizar chamada para a API
-#   dados <- chamar_api(args, base, n_max)
+#   dados <- pesq_api(args, base, n_max)
 #   if (length(dados) == 0) { return(dados) }
 #   
 #   # Formatar resultados
@@ -264,7 +264,7 @@ pesq_eventos_orgao <- function(id_orgao, id_tipo_evento = NULL, n_max = 15) {
   base <- stringr::str_c("orgaos/", id_orgao, "/eventos")
   
   # Realizar chamada para a API
-  dados <- chamar_api(args, base, n_max)
+  dados <- pesq_api(args, base, n_max)
   if (length(dados) == 0) { return(dados) }
   
   # Formatar resultados

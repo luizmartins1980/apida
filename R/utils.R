@@ -10,6 +10,26 @@ cria_param <- function(nome, vec) {
   return(vec)
 }
 
+# "Zipar" duas listas recursivamente
+zip_rec <- function(x, y) {
+  if (length(x) == 0) { return(y) }
+  purrr::map2(x, y, function(x, y) {
+    if(!is.list(x)) { c(x, y) }
+    else { zip_rec(x, y) }
+  })
+}
+
+# Substitui NULLs por NAs recursivamente
+null_to_na <- function(x) {
+  purrr::map(x, function(x) {
+    if(!is.list(x)) {
+      if (is.null(x)) { NA } else { x }
+    } else {
+      null_to_na(x)
+    }
+  })
+}
+
 # Trocar um conjunto de strings de "snake case" para "camel case"
 snake_to_camel <- function(string) {
   
@@ -41,44 +61,6 @@ camel_to_snake <- function(string) {
     stringr::str_to_lower()
 }
 
-# Realizar uma chamada para a API
-chamar_api <- function(args, base, n_max) {
-  
-  # URL base da chamada
-  url <- "https://dadosabertos.camara.leg.br/api/v2/"
-  base <- stringr::str_c(url, base)
-  
-  # Nomes originais dos argumentos da API
-  nomes <- args %>% names() %>% snake_to_camel()
-  
-  # Criar chamada
-  cham <- purrr::map2_chr(nomes, args, cria_param) %>%
-    stringr::str_c(collapse = "&") %>%
-    stringr::str_c(base, .)
-  
-  # Realizar primeira chamada e preparar loop
-  res <- jsonlite::fromJSON(cham); dados <- res$dados
-  if (length(dados) == 0) { return(dados) }
-  
-  # Repetir chamada caso necessário
-  while (!is.null(res$links) & length(dados[[1]]) < n_max) {
-    
-    # Realizar chamada
-    res <- jsonlite::fromJSON(res$links$href[2])
-    dados_ <- res$dados
-    
-    # Juntar dados
-    dados <- purrr::map2(dados, dados_, function(x, y) {
-      if(is.null(ncol(x))) { c(x, y) } else { rbind(x, y) }
-    })
-    
-    # Interromper o loop caso não haja mais dados
-    if (all(res$links$rel != "next")) { break() }
-  }
-  
-  return(dados)
-}
-
 # Aplica as funções tail e head em sequência
 meio <- function(x, tail, head) {
   x %>% utils::tail(tail) %>% utils::head(head)
@@ -90,4 +72,6 @@ magrittr::`%>%`
 # Livrar-se de alertas espúrios
 globalVariables(c("uri", "nome", "uriPartido", "data", "id",
                   "nomePapel", "uriMembros", "uri_orgao", ".",
-                  "uriOrgao"))
+                  "uriOrgao", "ultimoStatus.data",
+                  "ultimoStatus.gabinete.nome", "ultimoStatus.id",
+                  "ultimoStatus.nome", "status.data"))
