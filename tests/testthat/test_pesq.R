@@ -5,7 +5,7 @@ context("Funções pesq_*")
 test_that("As funções pesq_* retornam objetos do formato esperado", {
   
   # Partidos
-  expect_equal(dim(pesq_blocos()), c(2, 3))
+  # expect_equal(dim(pesq_blocos()), c(2, 3))
   expect_equal(dim(pesq_partidos()), c(15, 3))
 
   # Deputados

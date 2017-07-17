@@ -42,7 +42,7 @@ camel_to_snake <- function(string) {
 }
 
 # Realizar uma chamada para a API
-chamar_api <- function(args, base, fim) {
+chamar_api <- function(args, base, n_max) {
   
   # URL base da chamada
   url <- "https://dadosabertos.camara.leg.br/api/v2/"
@@ -51,14 +51,32 @@ chamar_api <- function(args, base, fim) {
   # Nomes originais dos argumentos da API
   nomes <- args %>% names() %>% snake_to_camel()
   
-  # Criar e realizar chamada
-  res <- purrr::map2_chr(nomes, args, cria_param) %>%
+  # Criar chamada
+  cham <- purrr::map2_chr(nomes, args, cria_param) %>%
     stringr::str_c(collapse = "&") %>%
-    stringr::str_c(fim, sep = "&") %>%
-    stringr::str_c(base, .) %>%
-    jsonlite::fromJSON()
+    stringr::str_c(base, .)
   
-  return(res$dados)
+  # Realizar primeira chamada e preparar loop
+  res <- jsonlite::fromJSON(cham)
+  dados <- res$dados
+  
+  # Repetir chamada caso necessário
+  while (length(dados[[1]]) < n_max & !is.null(res$links)) {
+    
+    # Realizar chamada
+    res <- jsonlite::fromJSON(res$links$href[2])
+    dados_ <- res$dados
+    
+    # Juntar dados
+    dados <- purrr::map2(dados, dados_, function(x, y) {
+      if(is.null(ncol(x))) { c(x, y) } else { rbind(x, y) }
+    })
+    
+    # Interromper o loop caso não haja mais dados
+    if (all(res$links$rel != "next")) { break() }
+  }
+  
+  return(dados)
 }
 
 # Aplica as funções tail e head em sequência

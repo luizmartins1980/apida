@@ -13,11 +13,11 @@ trazem informações mais profundas sobre um elemento específico da categoria e
 ## A fazer
 
 Este pacote está em desenvolvimento ativo! Aqui está uma lista do que já foi feito
-e do que ainda há de ser feito (OBS.: as funções relacionadas a votações e mesas não foram
+e do que ainda há de ser feito (OBS.: as funções relacionadas a votações não foram
 implementadas porque a API ainda não as suporta).
 
 Funcionalidades gerais
-- [ ] Implementar `n_max`
+- [X] Implementar `n_max`
 
 Blocos
 - [X] `/blocos`: Lista de dados sobre os blocos partidários
@@ -44,7 +44,7 @@ Legislaturas
 - [X] `/legislaturas`: Os períodos de mandatos e atividades parlamentares da Câmara
 - [X] `/legislaturas/{id}`: Informações extras sobre uma determinada legislatura
 da Câmara
-- [ ] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
+- [X] `/legislaturas/{id}/mesa`: Quais deputados fizeram parte da Mesa Diretora em uma
 legislatura
 
 Proposições
