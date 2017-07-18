@@ -1,19 +1,21 @@
 # apida
 
-Um pacote R para acessar a API do serviço
-[Dados Abertos da Câmara dos Deputados](https://dadosabertos.camara.leg.br/swagger/api.html)
+[![Travis-CI Build Status](https://travis-ci.org/ctlente/apida.svg?branch=master)](https://travis-ci.org/ctlente/apida) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ctlente/apida?branch=master&svg=true)](https://ci.appveyor.com/project/ctlente/apida) [![Coverage Status](https://img.shields.io/codecov/c/github/ctlente/apida/master.svg)](https://codecov.io/github/ctlente/apida?branch=master)
 
 ## Geral
+
+`apida` é um pacote R para acessar a API do serviço
+[Dados Abertos da Câmara dos Deputados](https://dadosabertos.camara.leg.br/swagger/api.html).
 
 Este pacote tem dois tipos de funções: `pesq` (de "pesquisar") e `peg` (de "pegar").
 No geral, as funções `pesq_<categoria>` trazem informações superficiais sobre um
 subconjunto de uma categoria (deputados, partidos, etc.). Já as funções `peg_<categoria>`
-trazem informações mais profundas sobre um elemento específico da categoria em questão.
+trazem informações mais profundas sobre um ou mais elementos específicos da categoria em questão.
 
 ## A fazer
 
-Este pacote está em desenvolvimento ativo! Aqui está uma lista do que já foi feito
-e do que ainda há de ser feito (OBS.: as funções relacionadas a votações não foram
+O `apida` ainda está em desenvolvimento ativo! Esta é uma lista do que já foi feito
+e do que ainda há de ser implementado (OBS.: as funções relacionadas a votações não foram
 implementadas porque a API ainda não as suporta).
 
 Geral

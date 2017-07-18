@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 todo.txt
+^\.travis\.yml$
+^appveyor\.yml$
+^codecov\.yml$
