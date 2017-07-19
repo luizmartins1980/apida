@@ -9,7 +9,7 @@ test_that("As funções peg_* retornam objetos do formato esperado", {
   expect_equal(dim(peg_deputado(73441)), c(1, 23))
   expect_equal(dim(peg_evento(48092)), c(1, 17))
   expect_equal(dim(peg_legislatura(13)), c(1, 3))
-  # expect_equal(dim(peg_mesa(13)), c(15, 0))
+  expect_equal(dim(peg_mesa(55)), c(23, 3))
   expect_equal(dim(peg_orgao(2003)), c(1, 12))
   expect_equal(dim(peg_partido(36779)), c(1, 12))
   expect_equal(dim(peg_proposicao(12677)), c(1, 26))

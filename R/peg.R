@@ -79,19 +79,19 @@ peg_legislatura <- function(id_legislatura) {
 }
 
 # Pegar mesa
-# peg_mesa <- function(id_legislatura) {
-#   
-#   # Realizar chamada para a API
-#   base <- "legislaturas/"
-#   dados <- peg_api(base, id_legislatura, "/mesa")
-#   
-#   # Formatar resultados
-#   saida <- tibble::as_tibble(dados) %>%
-#     dplyr::select(id, nome, nomePapel)
-#   names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
-#   
-#   return(saida)
-# }
+peg_mesa <- function(id_legislatura) {
+
+  # Realizar chamada para a API
+  base <- "legislaturas/"
+  dados <- peg_api(base, id_legislatura, "/mesa")
+
+  # Formatar resultados
+  saida <- tibble::as_tibble(dados) %>%
+    dplyr::select(id, nome, nomePapel)
+  names(saida) <- c("id_deputado", "nome_deputado", "nome_papel")
+
+  return(saida)
+}
 
 # Pegar evento
 peg_evento <- function(id_evento) {
