@@ -30,32 +30,28 @@ null_to_na <- function(x) {
   })
 }
 
+# Aplicar fun no primeiro caractere de uma string
+chg_fst <- function(x, fun) {
+  len <- stringr::str_length(x)
+  stringr::str_c(
+    fun(stringr::str_sub(x, 1, 1)),
+    stringr::str_sub(x, 2, len))
+}
+
+# Transformações necessárias para "camel case"
+to_camel <- function(string) {
+  stringr::str_split(string, "_") %>%
+    purrr::map(~chg_fst(.x, stringr::str_to_upper)) %>%
+    purrr::map_chr(~chg_fst(.x, stringr::str_to_lower))
+}
+
 # Trocar um conjunto de strings de "snake case" para "camel case"
 snake_to_camel <- function(string) {
-  
-  # Aplicar fun no primeiro caractere de uma string
-  chg_fst <- function(x, fun) {
-    len = stringr::str_length(x)
-    stringr::str_c(
-      fun(stringr::str_sub(x, 1, 1)),
-      stringr::str_sub(x, 2, len))
-  }
-  
-  # Transformações necessárias para "camel case"
-  to_camel <- function(string) {
-    stringr::str_split(string, "_") %>%
-      purrr::map(~chg_fst(.x, stringr::str_to_upper)) %>%
-      purrr::map_chr(~chg_fst(.x, stringr::str_to_lower))
-  }
-  
-  # Aplicar transformação em cada string
-  return(purrr::map_chr(string, to_camel))
+  purrr::map_chr(string, to_camel)
 }
 
 # Trocar um conjunto de strings de "camel case" para "snake case"
 camel_to_snake <- function(string) {
-    
-  # Converter cases
   string %>%
     purrr::map_chr(~stringr::str_replace_all(.x, "([A-Z])", "_\\1")) %>%
     stringr::str_to_lower()
