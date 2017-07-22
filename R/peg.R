@@ -1,4 +1,8 @@
-# Pegar bloco
+#' Pegar informações de um ou mais blocos de partidos
+#' 
+#' @param id_bloco Identificador(es) do(s) bloco(s)
+#' 
+#' @export
 peg_bloco <- function(id_bloco) {
   
   # Realizar chamada para a API
@@ -12,7 +16,11 @@ peg_bloco <- function(id_bloco) {
   return(saida)
 }
 
-# Pegar partido
+#' Pegar informações de um ou mais partidos
+#' 
+#' @param id_partido Identificador(es) do(s) partido(s)
+#' 
+#' @export
 peg_partido <- function(id_partido) {
   
   # Realizar chamada para a API
@@ -36,7 +44,11 @@ peg_partido <- function(id_partido) {
   return(saida)
 }
 
-# Pegar deputado
+#' Pegar informações de um ou mais deputados
+#' 
+#' @param id_deputado Identificador(es) do(s) deputado(s)
+#' 
+#' @export
 peg_deputado <- function(id_deputado) {
   
   # Realizar chamada para a API
@@ -64,7 +76,11 @@ peg_deputado <- function(id_deputado) {
   return(saida)
 }
 
-# Pegar legislatura
+#' Pegar informações de uma ou mais legislaturas
+#' 
+#' @param id_legislatura Identificador(es) da(s) legislatura(s)
+#' 
+#' @export
 peg_legislatura <- function(id_legislatura) {
   
   # Realizar chamada para a API
@@ -78,7 +94,11 @@ peg_legislatura <- function(id_legislatura) {
   return(saida)
 }
 
-# Pegar mesa
+#' Pegar informações de uma ou mais mesas de legislaturas
+#' 
+#' @param id_legislatura Identificador(es) da(s) legislatura(s)
+#' 
+#' @export
 peg_mesa <- function(id_legislatura) {
 
   # Realizar chamada para a API
@@ -93,7 +113,11 @@ peg_mesa <- function(id_legislatura) {
   return(saida)
 }
 
-# Pegar evento
+#' Pegar informações de um ou mais eventos
+#' 
+#' @param id_evento Identificador(es) do(s) evento(s)
+#' 
+#' @export
 peg_evento <- function(id_evento) {
   
   # Realizar chamada para a API
@@ -116,7 +140,11 @@ peg_evento <- function(id_evento) {
   return(saida)
 }
 
-# Pegar proposição
+#' Pegar informações de uma ou mais proposições
+#' 
+#' @param id_proposicao Identificador(es) da(s) proposição(s)
+#' 
+#' @export
 peg_proposicao <- function(id_proposicao) {
   
   # Realizar chamada para a API
@@ -140,7 +168,12 @@ peg_proposicao <- function(id_proposicao) {
   return(saida)
 }
 
-# Pegar órgãos legislativos
+
+#' Pegar informações de um ou mais órgãos legislativos
+#' 
+#' @param id_orgao Identificador(es) do(s) órgão(s)
+#' 
+#' @export
 peg_orgao <- function(id_orgao) {
   
   # Realizar chamada para a API
@@ -159,12 +192,13 @@ peg_orgao <- function(id_orgao) {
   return(saida)
 }
 
-# Função para pegar as tabelas de referências
-#
-# situacoesDeputado, situacoesEvento, situacoesOrgao
-# situacoesProposicao, tiposEvento, tiposOrgao
-# tiposProposicao, uf
-# 
+#' Pegar tabela de referência de alguma categoria
+#' 
+#' @param tipo_referencia Tipo da referência (situacoesDeputado,
+#' situacoesEvento, situacoesOrgao, situacoesProposicao, tiposEvento,
+#' tiposOrgao, tiposProposicao, uf)
+#' 
+#' @export
 peg_referencia <- function(tipo_referencia) {
   
   # Realizar chamada para a API
