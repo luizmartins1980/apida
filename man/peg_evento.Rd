@@ -7,7 +7,7 @@
 peg_evento(id_evento)
 }
 \arguments{
-\item{id_evento}{Identificador do evento}
+\item{id_evento}{Identificador(es) do(s) evento(s)}
 }
 \description{
 Pegar informações de um ou mais eventos

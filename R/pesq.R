@@ -1,4 +1,10 @@
-# Pesquisar blocos
+#' Pesquisar blocos de partidos
+#' 
+#' @param id_legislatura Identificador(es) da(s) legislatura(s) para filtrar
+#' @param sigla_partido Sigla(s) do(s) partido(s) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
                         n_max = 15) {
   
@@ -17,7 +23,14 @@ pesq_blocos <- function(id_legislatura = NULL, sigla_partido = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar partidos
+#' Pesquisar partidos
+#' 
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param id_legislatura Identificador(es) da(s) legislatura(s) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
                           id_legislatura = NULL, n_max = 15) {
   
@@ -36,7 +49,15 @@ pesq_partidos <- function(data_inicio = NULL, data_fim = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar deputados
+#' Pesquisar deputados
+#' 
+#' @param id_legislatura Identificador(es) da(s) legislatura(s) para filtrar
+#' @param sigla_uf Unidade(s) federativa(s) para filtrar
+#' @param sigla_partido Sigla(s) do(s) partido(s) para filtrar
+#' @param sigla_sexo Gênero(s) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
                            sigla_partido = NULL, sigla_sexo = NULL,
                            n_max = 15) {
@@ -58,7 +79,12 @@ pesq_deputados <- function(id_legislatura = NULL, sigla_uf = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar legislaturas
+#' Pesquisar legislaturas
+#' 
+#' @param data Data(s) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_legislaturas <- function(data = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API
@@ -76,8 +102,16 @@ pesq_legislaturas <- function(data = NULL, n_max = 15) {
   return(utils::head(saida, n_max))
 }
 
-
-# Pesquisar despesas de um deputado
+#' Pesquisar despesas de um ou mais deputados
+#' 
+#' @param id_deputado Identificador(es) do(s) deputado(s) para filtrar
+#' @param id_legislatura Identificador(es) da(s) legislatura(s) para filtrar
+#' @param ano Ano(s) para filtrar
+#' @param mes Mês(es) para filtrar
+#' @param cnpj_cpf_fornecedor CNPJ/CPF do(s) fornecedor(es) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
                                    ano = NULL, mes = NULL,
                                    cnpj_cpf_fornecedor = NULL, n_max = 15) {
@@ -103,7 +137,14 @@ pesq_despesas_deputado <- function(id_deputado, id_legislatura = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar eventos de um deputado
+#' Pesquisar eventos de um ou mais deputados
+#' 
+#' @param id_deputado Identificador(es) do(s) deputado(s) para filtrar
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
                                  data_fim = NULL, n_max = 15) {
   
@@ -126,7 +167,14 @@ pesq_eventos_deputado <- function(id_deputado, data_inicio = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar órgãos de um deputado
+#' Pesquisar órgãos de um ou mais deputados
+#' 
+#' @param id_deputado Identificador(es) do(s) deputado(s) para filtrar
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
                                   data_fim = NULL, n_max = 15) {
   
@@ -147,7 +195,19 @@ pesq_orgaos_deputado <- function(id_deputado, data_inicio = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar eventos ocorridos ou previstos nos diversos órgãos da Câmara
+#' Pesquisar eventos ocorridos ou previstos nos diversos órgãos da Câmara
+#' 
+#' @param id_tipo_evento Identificador(es) do(s) tipo(s) de evento para filtrar
+#' @param id_situacao Identificador(es) da(s) situação(ões) para filtrar
+#' @param id_tipo_orgao Identificador(es) do(s) tipo(s) de órgão para filtrar
+#' @param id_orgao Identificador(es) do(s) órgão(s) para filtrar
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param hora_inicio Hora(s) de início para filtrar
+#' @param hora_fim Hora(s) de término para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
                          id_tipo_orgao = NULL, id_orgao = NULL,
                          data_inicio = NULL, data_fim = NULL,
@@ -174,7 +234,24 @@ pesq_eventos <- function(id_tipo_evento = NULL, id_situacao = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar proposições
+#' Pesquisar proposições
+#' 
+#' @param sigla_uf_autor Unidade(s) federativa(s) do(s) autor(es) para filtrar
+#' @param sigla_tipo Sigla(s) do(s) tipo(s) de proposição(ões) para filtrar
+#' @param sigla_partido_autor Sigla(s) do(s) partido(s) do(s) autor(es) para filtrar
+#' @param numero Número(s) da(s) proposição(ões) para filtrar
+#' @param ano Ano(s) para filtrar
+#' @param data_aprensentacao_inicio Data(s) de início da(s) apresentação(ções) para filtrar
+#' @param data_aprensentacao_fim Data(s) de término da(s) apresentação(ções) para filtrar
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param id_autor Identificador(es) do(s) autor(es) para filtrar
+#' @param nome_autor Nome(s) do(s) autor(es) para filtrar
+#' @param id_situacao Identificador(es) da(s) situação(ções) para filtrar
+#' @param cod_partido Código(s) do(s) partido(s) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
                              sigla_partido_autor = NULL, numero = NULL, ano = NULL,
                              data_aprensentacao_inicio = NULL,
@@ -198,7 +275,14 @@ pesq_proposicoes <- function(sigla_uf_autor = NULL, sigla_tipo = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar órgãos legislativos
+#' Pesquisar órgãos legislativos
+#' 
+#' @param id_tipo_orgao Identificador(es) do(s) tipo(s) de órgão para filtrar
+#' @param data_inicio Data(s) de início para filtrar
+#' @param data_fim Data(s) de término para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
                         data_fim = NULL, n_max = 15) {
   
@@ -218,7 +302,12 @@ pesq_orgaos <- function(id_tipo_orgao = NULL, data_inicio = NULL,
   return(utils::head(saida, n_max))
 }
 
-# Pesquisar tramitações de uma proposição
+#' Pesquisar tramitações de uma proposição
+#' 
+#' @param id_proposicao Identificador(es) da(s) proposição(ções) para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
   
   # Informações necessárias para chamar a API
@@ -254,6 +343,13 @@ pesq_tramitacoes_proposicao <- function(id_proposicao, n_max = 15) {
 #   return(utils::head(saida, n_max))
 # }
 
+#' Pesquisar eventos de um órgão
+#' 
+#' @param id_orgao Identificador(es) do(s) órgão(s) para filtrar
+#' @param id_tipo_evento Identificador(es) do(s) tipo(s) de evento para filtrar
+#' @param n_max Número máximo de registros para retornar
+#' 
+#' @export
 pesq_eventos_orgao <- function(id_orgao, id_tipo_evento = NULL, n_max = 15) {
   
   # Informações necessárias para chamar a API

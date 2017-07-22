@@ -7,7 +7,7 @@
 peg_partido(id_partido)
 }
 \arguments{
-\item{id_partido}{Identificador do partido}
+\item{id_partido}{Identificador(es) do(s) partido(s)}
 }
 \description{
 Pegar informações de um ou mais partidos

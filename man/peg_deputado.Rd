@@ -7,7 +7,7 @@
 peg_deputado(id_deputado)
 }
 \arguments{
-\item{id_deputado}{Identificador do deputado}
+\item{id_deputado}{Identificador(es) do(s) deputado(s)}
 }
 \description{
 Pegar informações de um ou mais deputados

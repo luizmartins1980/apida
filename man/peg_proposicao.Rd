@@ -7,7 +7,7 @@
 peg_proposicao(id_proposicao)
 }
 \arguments{
-\item{id_proposicao}{Identificador da proposição}
+\item{id_proposicao}{Identificador(es) da(s) proposição(s)}
 }
 \description{
 Pegar informações de uma ou mais proposições

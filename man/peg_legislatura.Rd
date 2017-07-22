@@ -7,7 +7,7 @@
 peg_legislatura(id_legislatura)
 }
 \arguments{
-\item{id_legislatura}{Identificador da legislatura}
+\item{id_legislatura}{Identificador(es) da(s) legislatura(s)}
 }
 \description{
 Pegar informações de uma ou mais legislaturas

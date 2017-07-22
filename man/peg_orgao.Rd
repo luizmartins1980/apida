@@ -7,7 +7,7 @@
 peg_orgao(id_orgao)
 }
 \arguments{
-\item{id_orgao}{Identificador do órgão}
+\item{id_orgao}{Identificador(es) do(s) órgão(s)}
 }
 \description{
 Pegar informações de um ou mais órgãos legislativos

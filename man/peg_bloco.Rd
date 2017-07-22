@@ -7,7 +7,7 @@
 peg_bloco(id_bloco)
 }
 \arguments{
-\item{id_bloco}{Identificador do bloco}
+\item{id_bloco}{Identificador(es) do(s) bloco(s)}
 }
 \description{
 Pegar informações de um ou mais blocos de partidos
